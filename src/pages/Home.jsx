@@ -1,7 +1,7 @@
 import Banner from "../components/Banner";
 import EventCategories from "../components/EventCategories";
 import EventFeatures from "../components/EventFeatures";
-
+import EventTestimonials from "../components/EventTestimonials";
 
 const Home = () => {
   return (
@@ -14,6 +14,9 @@ const Home = () => {
       </section>
       <section>
         <EventCategories />
+      </section>
+      <section>
+        <EventTestimonials />
       </section>
     </div>
   );

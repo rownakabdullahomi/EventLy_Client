@@ -1,7 +1,7 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import userImage from "../assets/user.gif";
 import { useContext, useState } from "react";
-import { AuthContext } from "../provider/AuthProvider";
+import { AuthContext } from "../../provider/AuthProvider";
 import toast from "react-hot-toast";
 
 const Navbar = () => {

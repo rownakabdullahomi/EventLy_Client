@@ -8,11 +8,13 @@ import AllEvents from "../pages/AllEvents";
 import AddEvent from "../pages/AddEvent";
 import MyEvents from "../pages/MyEvents";
 import UpdateEvent from "../pages/UpdateEvent";
+import Error404 from "./../pages/Error404";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <Error404 />,
     children: [
       {
         path: "/",

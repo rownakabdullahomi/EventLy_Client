@@ -116,7 +116,7 @@ const handleJoinEvent = async (id) => {
 
 
   return (
-    <div className="max-w-7xl mx-auto p-4">
+    <div className="max-w-7xl mx-auto p-4 my-10">
       <h2 className="text-3xl font-bold mb-4 text-center text-primary">
         All Events
       </h2>

@@ -43,7 +43,7 @@ const MyEvents = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-4">
+    <div className="max-w-7xl mx-auto p-4 my-10">
       <h2 className="text-3xl font-bold mb-6 text-center text-primary">
         My Events
       </h2>

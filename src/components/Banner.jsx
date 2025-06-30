@@ -29,42 +29,42 @@ const Banner = () => {
           <img
             src={slide2}
             alt="Slide 1"
-            className="w-full h-[550px] "
+            className="w-full h-[650px] "
           />
         </SwiperSlide>
         <SwiperSlide>
           <img
             src={slide3}
             alt="Slide 1"
-            className="w-full h-[550px] "
+            className="w-full h-[650px] "
           />
         </SwiperSlide>
         <SwiperSlide>
           <img
             src={slide4}
             alt="Slide 1"
-            className="w-full h-[550px] "
+            className="w-full h-[650px] "
           />
         </SwiperSlide>
         <SwiperSlide>
           <img
             src={slide5}
             alt="Slide 1"
-            className="w-full h-[550px] "
+            className="w-full h-[650px] "
           />
         </SwiperSlide>
         <SwiperSlide>
           <img
             src={slide6}
             alt="Slide 1"
-            className="w-full h-[550px] "
+            className="w-full h-[650px] "
           />
         </SwiperSlide>
         <SwiperSlide>
           <img
             src={slide1}
             alt="Slide 1"
-            className="w-full h-[550px] "
+            className="w-full h-[650px] "
           />
         </SwiperSlide>
       </Swiper>

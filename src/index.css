@@ -1,2 +1,10 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+
+#navbar .active {
+    background-color: white; /* Custom blue background */
+    color: blue; /* Text color */
+    border: 1px solid rgb(163, 163, 211); /* Match btn-outline border */
+    transition: all 0.3s ease-in-out; /* Smooth transition */
+}

@@ -2,14 +2,15 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaHome, FaSignInAlt } from "react-icons/fa";
 import LoginGif from "../assets/Computer login.gif";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { AuthContext } from "../provider/AuthProvider";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const Login = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const { setUser } = useContext(AuthContext);
+  const axiosPublic = useAxiosPublic();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -20,12 +21,9 @@ const Login = () => {
     const existingUser = { email, password };
 
     try {
-      const result = await axios.post(
-        `${import.meta.env.VITE_API_URL}/user/login`,
-        existingUser
-      );
+      const result = await axiosPublic.post(`/user/login`, existingUser);
       const { token, data } = result.data;
-    //   console.log(token, data);
+      //   console.log(token, data);
       localStorage.setItem("access-token", token);
       setUser(data);
       toast.success("User login successful.");

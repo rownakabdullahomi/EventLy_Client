@@ -1,54 +1,60 @@
-
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import userImage from "../assets/user.gif";
 import { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Navbar = () => {
-    const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
-    const navigate = useNavigate();
-    const { user, userLogout } = useContext(AuthContext);
+  const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+  const navigate = useNavigate();
+  const { user, userLogout } = useContext(AuthContext);
 
-    // console.log(user);
-    const handleLogout = () => {
-        userLogout();
-        navigate("/login");
-    }
+  // console.log(user);
+  const handleLogout = () => {
+    userLogout();
+    navigate("/login");
+  };
 
-      const toggleProfileDropdown = () => {
+  const toggleProfileDropdown = () => {
     setProfileDropdownOpen(!profileDropdownOpen);
   };
 
-    
   const links = (
     <>
       <li>
         <NavLink
           to="/"
-          className="hover:border-2 hover:border-primary font-medium tracking-wide duration-200"
+          className="btn hover:btn-primary hover:btn-soft"
         >
           Home
         </NavLink>
       </li>
 
-      {/* {user ? (
+      {user && user?.email ? (
         <>
           <li>
             <NavLink
-              to="/add_tutorials"
+              to="/all-events"
               className="hover:border-2 hover:border-primary font-medium tracking-wide duration-200"
             >
-              Add Tutorials
+              Events
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/add-event"
+              className="hover:border-2 hover:border-primary font-medium tracking-wide duration-200"
+            >
+              Add Event
             </NavLink>
           </li>
         </>
       ) : (
         <></>
-      )} */}
+      )}
       <li>
         <NavLink
           to="/about"
-          className="hover:border-2 hover:border-primary font-medium tracking-wide duration-200 "
+          className=" btn hover:btn-primary hover:btn-soft"
         >
           About Us
         </NavLink>
@@ -57,7 +63,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="bg-base-100 shadow-sm ">
+    <div  id="navbar" className="bg-base-100 shadow-sm ">
       <div className="navbar max-w-11/12 mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
@@ -102,8 +108,6 @@ const Navbar = () => {
 
         {/* Navbar End */}
         <div className="navbar-end">
-
-
           {/* Theme Toggle */}
           {/* <button
             className="p-2 text-2xl"
@@ -118,60 +122,61 @@ const Navbar = () => {
           </button> */}
 
           {/* Profile Dropdown */}
-          <div
-            // ref={profileDropdownRef}
-            className="dropdown dropdown-end relative"
-          >
-            <button
-              onClick={toggleProfileDropdown}
-              className="btn btn-ghost btn-circle avatar"
-              aria-label="Toggle Profile Dropdown"
+          {user && user.email ? (
+            <div
+              // ref={profileDropdownRef}
+              className="dropdown dropdown-end relative"
             >
-              <div className="w-10 h-10 flex items-center justify-center rounded-full overflow-hidden border border-gray-300 bg-gray-200">
-                 {user && user.email ? (
-                  <img
-                    referrerPolicy="no-referrer"
-                    alt="User Profile"
-                    src={user?.photoURL || "user"}
-                    className="w-full h-full object-cover animate-pulse"
-                  />
-                ) : (
-                  <img src={userImage} alt="" />
-                )}
-              </div>
-            </button>
-            {profileDropdownOpen && (
-              <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                {/* Username (non-clickable) */}
-                <li>
-                  <div
-                    id="name"
-                    className="justify-between text-base-content font-semibold"
-                  >
-                    {user?.email ? user.name : ""}
-                  </div>
-                </li>
+              <button
+                onClick={toggleProfileDropdown}
+                className="btn btn-ghost btn-circle avatar"
+                aria-label="Toggle Profile Dropdown"
+              >
+                <div className="w-10 h-10 flex items-center justify-center rounded-full overflow-hidden border border-gray-300 bg-gray-200">
+                  {user && user.email ? (
+                    <img
+                      referrerPolicy="no-referrer"
+                      alt="User Profile"
+                      src={user?.photoURL || "user"}
+                      className="w-full h-full object-cover animate-pulse"
+                    />
+                  ) : (
+                    <img src={userImage} alt="" />
+                  )}
+                </div>
+              </button>
+              {profileDropdownOpen && (
+                <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                  {/* Username (non-clickable) */}
+                  <li>
+                    <div
+                      id="name"
+                      className="justify-between text-base-content font-semibold"
+                    >
+                      {user?.email ? user.name : ""}
+                    </div>
+                  </li>
 
-                {/* Other Dropdown Items */}
+                  {/* Other Dropdown Items */}
 
-
-                <li>
-                  {user && user?.email ? (
+                  <li>
                     <button
                       onClick={handleLogout}
                       className="text-error font-semibold"
                     >
                       Logout
                     </button>
-                  ) : (
-                    <Link to="/login" className="text-primary font-semibold">
-                      Login
-                    </Link>
-                  )}
-                </li>
-              </ul>
-            )}
-          </div>
+                  </li>
+                </ul>
+              )}
+            </div>
+          ) : (
+            <div className="navbar-end">
+              <Link to="/login" className="btn btn-soft btn-primary">
+                Login
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -3,13 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaHome, FaUserPlus } from "react-icons/fa";
 import RegisterGif from "../assets/Sign up.gif";
 import toast, { Toaster } from "react-hot-toast";
-import axios from "axios";
 import { AuthContext } from "../provider/AuthProvider";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const Register = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const { setUser } = useContext(AuthContext);
+  const axiosPublic = useAxiosPublic();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -36,10 +37,7 @@ const Register = () => {
     const newUser = { name, email, password, photoURL };
 
     try {
-      const result = await axios.post(
-        `${import.meta.env.VITE_API_URL}/user`,
-        newUser
-      );
+      const result = await axiosPublic.post(`/user`, newUser);
       const { token, data } = result.data;
       //   console.log(token, data);
       localStorage.setItem("access-token", token);

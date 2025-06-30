@@ -41,7 +41,7 @@ const UpdateEvent = () => {
         
       }
     } catch (err) {
-      toast.error("Failed to update event.", err.message);
+      toast.error(err?.response?.data?.message || "Failed to update event.");
     }
   };
 

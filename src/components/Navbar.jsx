@@ -2,6 +2,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import userImage from "../assets/user.gif";
 import { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
@@ -9,8 +10,9 @@ const Navbar = () => {
   const { user, userLogout } = useContext(AuthContext);
 
   // console.log(user);
-  const handleLogout = () => {
-    userLogout();
+  const handleLogout = async() => {
+    await userLogout();
+    toast.success("Logout Successful.")
     navigate("/login");
   };
 
@@ -71,9 +73,9 @@ const Navbar = () => {
   );
 
   return (
-    <div  id="navbar" className="bg-base-100 shadow-sm ">
-      <div className="navbar max-w-11/12 mx-auto">
-        <div className="navbar-start">
+    <div  id="navbar" className="navbar bg-base-100 shadow-sm px-4 lg:px-6">
+
+        <div className="  navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
@@ -102,7 +104,7 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <Link to={"/"} className="hidden lg:block btn btn-ghost text-xl mt-1">
+          <Link to={"/"} className="hidden lg:block btn btn-ghost pl-0 text-xl mt-1">
             EventLy
           </Link>
         </div>
@@ -186,7 +188,7 @@ const Navbar = () => {
             </div>
           )}
         </div>
-      </div>
+
     </div>
   );
 };

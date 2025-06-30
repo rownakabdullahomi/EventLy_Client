@@ -36,7 +36,7 @@ const MyEvents = () => {
         toast.success("Event deleted successfully");
         refetch();
       } catch (err) {
-        toast.error("Failed to delete event", err.message);
+        toast.error(err?.response?.data?.message || "Failed to delete event");
         
       }
     }

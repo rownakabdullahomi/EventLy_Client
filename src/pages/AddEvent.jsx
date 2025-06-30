@@ -20,7 +20,7 @@ const AddEvent = () => {
         reset();
       }
     } catch (error) {
-      toast.error("Failed to create event. Please try again.", error.message);
+      toast.error(error?.response?.data?.message || "Failed to create event. Please try again.");
     }
   };
 

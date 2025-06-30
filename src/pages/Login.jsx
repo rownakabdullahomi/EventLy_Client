@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaHome, FaSignInAlt } from "react-icons/fa";
 import LoginGif from "../assets/Computer login.gif";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { AuthContext } from "../provider/AuthProvider";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 
@@ -29,12 +29,22 @@ const Login = () => {
       toast.success("User login successful.");
       navigate("/");
     } catch (error) {
-      toast.error("Login Failed! " + error.message);
+      toast.error(error?.response?.data?.message || "Login Failed!");
     }
   };
 
   return (
     <div className="bg-base-200 flex items-center justify-center md:h-screen p-6">
+      {/* Toast Notifications */}
+      <Toaster
+        toastOptions={{
+          className: "",
+          style: {
+            fontSize: "16px",
+            fontWeight: "bold",
+          },
+        }}
+      />
       <div className="w-full max-w-7xl flex flex-col md:flex-row justify-around gap-10 bg-base-100 rounded-xl shadow-lg p-8 overflow-hidden">
         {/* Left Side - GIF */}
         <div className="flex flex-col justify-center items-center">

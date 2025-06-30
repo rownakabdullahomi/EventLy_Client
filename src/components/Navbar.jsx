@@ -34,15 +34,23 @@ const Navbar = () => {
           <li>
             <NavLink
               to="/all-events"
-              className="hover:border-2 hover:border-primary font-medium tracking-wide duration-200"
+              className="btn hover:btn-primary hover:btn-soft"
             >
               Events
             </NavLink>
           </li>
           <li>
             <NavLink
+              to="/my-events"
+              className="btn hover:btn-primary hover:btn-soft"
+            >
+              My Events
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               to="/add-event"
-              className="hover:border-2 hover:border-primary font-medium tracking-wide duration-200"
+              className="btn hover:btn-primary hover:btn-soft"
             >
               Add Event
             </NavLink>

@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
 import { FaCalendarPlus, FaUsers, FaFilter, FaBell, FaClock, FaChartLine } from "react-icons/fa";
 import { Bounce, Slide, Fade } from "react-awesome-reveal";
+import Headings from "./shared/Heading";
 
-const Features = () => {
+const EventFeatures = () => {
   const features = [
     {
       id: 1,
@@ -49,16 +50,15 @@ const Features = () => {
   ];
 
   return (
-    <section className="bg-base-100 px-4 lg:px-6 py-16">
+    <section className="bg-base-100 px-4 lg:px-6 py-20">
 
-      <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold text-primary mb-3">
-          Why Choose Our Event Platform?
-        </h2>
-        <p className="text-lg text-gray-600 max-w-xl mx-auto">
-          Discover a smarter way to manage, share, and join events. Designed for modern collaboration.
-        </p>
-      </div>
+      
+      <Headings
+            heading={"Why Choose Our EventLy?"}
+            subHeading={
+              "Discover a smarter way to manage, share, and join events. Designed for modern collaboration."
+            }
+          ></Headings>
 
       {/* Feature Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
@@ -76,4 +76,4 @@ const Features = () => {
   );
 };
 
-export default Features;
+export default EventFeatures;

@@ -1,12 +1,20 @@
-
 import Banner from "../components/Banner";
-import Features from "../components/Features";
+import EventCategories from "../components/EventCategories";
+import EventFeatures from "../components/EventFeatures";
+
 
 const Home = () => {
   return (
     <div>
-      <section><Banner /></section>
-      <section><Features /></section>
+      <section>
+        <Banner />
+      </section>
+      <section>
+        <EventFeatures />
+      </section>
+      <section>
+        <EventCategories />
+      </section>
     </div>
   );
 };

@@ -61,7 +61,17 @@ const AddEvent = () => {
           <label className="text-sm font-medium mb-1">Date & Time</label>
           <input
             type="datetime-local"
-            {...register("dateTime", { required: true })}
+            {...register("dateTime", {
+              required: "Date & time is required",
+              validate: (value) => {
+                const selectedDate = new Date(value);
+                const now = new Date();
+                return (
+                  selectedDate > now ||
+                  toast.error("Date & time must be in the future")
+                );
+              },
+            })}
             className="input input-bordered w-full"
           />
         </div>

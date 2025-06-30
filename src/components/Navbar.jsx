@@ -1,10 +1,26 @@
-import { Link, NavLink } from "react-router-dom";
+
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import userImage from "../assets/user.gif";
+import { useContext, useState } from "react";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Navbar = () => {
+    const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+    const navigate = useNavigate();
+    const { user, userLogout } = useContext(AuthContext);
 
+    // console.log(user);
+    const handleLogout = () => {
+        userLogout();
+        navigate("/login");
+    }
 
+      const toggleProfileDropdown = () => {
+    setProfileDropdownOpen(!profileDropdownOpen);
+  };
 
-      const links = (
+    
+  const links = (
     <>
       <li>
         <NavLink
@@ -25,22 +41,6 @@ const Navbar = () => {
               Add Tutorials
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/my_tutorials"
-              className="hover:border-2 hover:border-primary font-medium tracking-wide duration-200"
-            >
-              My Tutorials
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/my_booked_tutors"
-              className="hover:border-2 hover:border-primary font-medium tracking-wide duration-200"
-            >
-              My Booked Tutors
-            </NavLink>
-          </li>
         </>
       ) : (
         <></>
@@ -55,7 +55,6 @@ const Navbar = () => {
       </li>
     </>
   );
-
 
   return (
     <div className="bg-base-100 shadow-sm ">
@@ -83,11 +82,15 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
-                <Link to={"/"} className="btn btn-ghost text-xl">EventLy</Link>
+              <Link to={"/"} className="btn btn-ghost text-xl">
+                EventLy
+              </Link>
               {links}
             </ul>
           </div>
-          <Link to={"/"} className="hidden lg:block btn btn-ghost text-xl mt-1">EventLy</Link>
+          <Link to={"/"} className="hidden lg:block btn btn-ghost text-xl mt-1">
+            EventLy
+          </Link>
         </div>
 
         {/* Navbar Center */}
@@ -96,8 +99,79 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
+
+        {/* Navbar End */}
         <div className="navbar-end">
-          <Link to={"/login"} className="btn">Login</Link>
+
+
+          {/* Theme Toggle */}
+          {/* <button
+            className="p-2 text-2xl"
+            onClick={toggleTheme}
+            title="Toggle Theme"
+          >
+            {theme === "light" ? (
+              <FaMoon className="text-gray-300 transition-transform duration-300 hover:scale-110" />
+            ) : (
+              <FaSun className="text-yellow-500 transition-transform duration-300 hover:scale-110" />
+            )}
+          </button> */}
+
+          {/* Profile Dropdown */}
+          <div
+            // ref={profileDropdownRef}
+            className="dropdown dropdown-end relative"
+          >
+            <button
+              onClick={toggleProfileDropdown}
+              className="btn btn-ghost btn-circle avatar"
+              aria-label="Toggle Profile Dropdown"
+            >
+              <div className="w-10 h-10 flex items-center justify-center rounded-full overflow-hidden border border-gray-300 bg-gray-200">
+                 {user && user.email ? (
+                  <img
+                    referrerPolicy="no-referrer"
+                    alt="User Profile"
+                    src={user?.photoURL || "user"}
+                    className="w-full h-full object-cover animate-pulse"
+                  />
+                ) : (
+                  <img src={userImage} alt="" />
+                )}
+              </div>
+            </button>
+            {profileDropdownOpen && (
+              <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                {/* Username (non-clickable) */}
+                <li>
+                  <div
+                    id="name"
+                    className="justify-between text-base-content font-semibold"
+                  >
+                    {user?.email ? user.name : ""}
+                  </div>
+                </li>
+
+                {/* Other Dropdown Items */}
+
+
+                <li>
+                  {user && user?.email ? (
+                    <button
+                      onClick={handleLogout}
+                      className="text-error font-semibold"
+                    >
+                      Logout
+                    </button>
+                  ) : (
+                    <Link to="/login" className="text-primary font-semibold">
+                      Login
+                    </Link>
+                  )}
+                </li>
+              </ul>
+            )}
+          </div>
         </div>
       </div>
     </div>

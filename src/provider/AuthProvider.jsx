@@ -11,37 +11,35 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const axiosPublic = useAxiosPublic();
 
-  useEffect(() => {
-    const fetchCurrentUser = async () => {
-      const token = localStorage.getItem("access-token");
-      if (!token) {
-        setUser(null);
-        setLoading(false);
-        return;
-      }
+useEffect(() => {
+  const fetchCurrentUser = async () => {
+    const token = localStorage.getItem("access-token");
+    if (!token) {
+      setUser(null);
+      setLoading(false);
+      return;
+    }
 
-      try {
-        const res = await axiosPublic.get(
-          `${import.meta.env.VITE_API_URL}/user/jwt`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setUser(res.data);
-      } catch (err) {
-        console.log(err);
-        setUser(null);
-        localStorage.removeItem("access-token");
-      } finally {
-        setLoading(false);
-      }
-    };
-    return () => {
-      fetchCurrentUser();
-    };
-  }, [axiosPublic]);
+    try {
+      const res = await axiosPublic(`/user/jwt`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setUser(res.data);
+    } catch (err) {
+      console.log(err);
+      setUser(null);
+      localStorage.removeItem("access-token");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchCurrentUser(); 
+
+}, [axiosPublic]);
+
 
   const userLogout = () => {
     setUser(null);

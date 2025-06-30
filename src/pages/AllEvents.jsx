@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { AuthContext } from "../provider/AuthProvider";
 import { format } from "date-fns";
+import toast from "react-hot-toast";
 
 const AllEvents = () => {
   const axiosSecure = useAxiosSecure();
@@ -10,7 +11,7 @@ const AllEvents = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterType, setFilterType] = useState("all");
 
-  const { data: eventResponse = {} } = useQuery({
+  const { data: eventResponse = {}, refetch, } = useQuery({
     queryKey: ["events", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get("/event");
@@ -96,6 +97,24 @@ const AllEvents = () => {
     return filtered;
   }, [sortedEvents, searchQuery, filterType]);
 
+
+const handleJoinEvent = async (id) => {
+   const data = {
+      userId: user._id
+    }
+  try {
+   
+    await axiosSecure.post(`/event/${id}`, data);
+    toast.success("Successfully joined the event!");
+
+   refetch();
+  } catch (err) {
+    // console.log(err);
+    toast.error(err?.response?.data?.message || "Failed to join event");
+  }
+};
+
+
   return (
     <div className="max-w-7xl mx-auto p-4">
       <h2 className="text-3xl font-bold mb-4 text-center text-primary">
@@ -153,7 +172,12 @@ const AllEvents = () => {
                 {event.attendeeCount}
               </p>
               <div className="card-actions justify-end mt-4">
-                <button className="btn btn-sm btn-primary">Join Event</button>
+                <button
+                  onClick={() => handleJoinEvent(event._id)}
+                  className="btn btn-sm btn-primary"
+                >
+                  Join Event
+                </button>
               </div>
             </div>
           </div>

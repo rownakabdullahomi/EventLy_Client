@@ -1,8 +1,5 @@
-Here’s a professional and visually structured `README.md` for your **EventLy** – Event Management Web Application:
 
----
-
-# 📅 EventLy - Event Management Web Application (MERN Stack)
+# 📅🎇 EventLy - Event Management Web Application 🧩✨
 
 ![EventLy Banner](https://i.ibb.co/84gS2WFg/evently-frontend1.png) 
 ![EventLy Banner](https://i.ibb.co/qMrw7vHT/enently-frontend2.png) 

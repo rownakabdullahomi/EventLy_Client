@@ -1,5 +1,5 @@
 
-# 📅🎇 EventLy - Event Management Web Application 🧩✨
+# 📅🎇 EventLy - Frontend 🧩✨
 
 ![EventLy Banner](https://i.ibb.co/84gS2WFg/evently-frontend1.png) 
 ![EventLy Banner](https://i.ibb.co/qMrw7vHT/enently-frontend2.png) 

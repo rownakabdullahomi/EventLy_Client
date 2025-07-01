@@ -6,12 +6,14 @@ import { format } from "date-fns";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import LoadingSpinner from "../components/shared/LoadingSpinner";
+import NoData from "../components/shared/NoData";
 
 const MyEvents = () => {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const axiosSecure = useAxiosSecure();
 
-  const { data: myEvents = {}, refetch } = useQuery({
+  const { data: myEvents = {}, refetch, isLoading } = useQuery({
     queryKey: ["myEvents", user?._id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/event/${user._id}`);
@@ -41,6 +43,9 @@ const MyEvents = () => {
       }
     }
   };
+
+  if (loading || isLoading) return <LoadingSpinner />;
+  if (!myEvents.data) return <NoData />;
 
   return (
     <div className="max-w-7xl mx-auto p-4 my-10">

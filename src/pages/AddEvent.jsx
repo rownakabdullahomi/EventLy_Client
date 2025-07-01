@@ -3,10 +3,11 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../provider/AuthProvider";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import LoadingSpinner from "../components/shared/LoadingSpinner";
 
 const AddEvent = () => {
   const { register, handleSubmit, reset } = useForm();
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
 
   const axiosSecure = useAxiosSecure();
 
@@ -20,9 +21,14 @@ const AddEvent = () => {
         reset();
       }
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Failed to create event. Please try again.");
+      toast.error(
+        error?.response?.data?.message ||
+          "Failed to create event. Please try again."
+      );
     }
   };
+
+  if (loading) return <LoadingSpinner />;
 
   return (
     <div className="max-w-5xl mx-auto p-6 bg-white shadow-xl rounded-2xl my-10">

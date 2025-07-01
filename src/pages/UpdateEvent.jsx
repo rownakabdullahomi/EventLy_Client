@@ -5,9 +5,10 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 import { useContext, useEffect } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../provider/AuthProvider";
+import LoadingSpinner from "../components/shared/LoadingSpinner";
 
 const UpdateEvent = () => {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const { register, handleSubmit, reset } = useForm();
@@ -45,7 +46,7 @@ const UpdateEvent = () => {
     }
   };
 
-  if (isLoading) return <p className="text-center mt-10">Loading event...</p>;
+  if (loading || isLoading) return <LoadingSpinner/>
   if (isError)
     return <p className="text-center text-red-500">Failed to fetch event.</p>;
 

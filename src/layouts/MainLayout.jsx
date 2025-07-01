@@ -23,7 +23,7 @@ const MainLayout = () => {
       </nav>
 
       {/* Main Content */}
-      <main className="min-h-[calc(100vh-400px)]">
+      <main className="min-h-[calc(100vh-300px)]">
         <Outlet />
       </main>
 

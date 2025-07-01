@@ -4,14 +4,20 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 import { AuthContext } from "../provider/AuthProvider";
 import { format } from "date-fns";
 import toast from "react-hot-toast";
+import NoData from "../components/shared/NoData";
+import LoadingSpinner from "../components/shared/LoadingSpinner";
 
 const AllEvents = () => {
   const axiosSecure = useAxiosSecure();
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterType, setFilterType] = useState("all");
 
-  const { data: eventResponse = {}, refetch, } = useQuery({
+  const {
+    data: eventResponse = {},
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["events", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get("/event");
@@ -97,23 +103,23 @@ const AllEvents = () => {
     return filtered;
   }, [sortedEvents, searchQuery, filterType]);
 
+  const handleJoinEvent = async (id) => {
+    const data = {
+      userId: user._id,
+    };
+    try {
+      await axiosSecure.post(`/event/${id}`, data);
+      toast.success("Successfully joined the event!");
 
-const handleJoinEvent = async (id) => {
-   const data = {
-      userId: user._id
+      refetch();
+    } catch (err) {
+      // console.log(err);
+      toast.error(err?.response?.data?.message || "Failed to join event");
     }
-  try {
-   
-    await axiosSecure.post(`/event/${id}`, data);
-    toast.success("Successfully joined the event!");
+  };
 
-   refetch();
-  } catch (err) {
-    // console.log(err);
-    toast.error(err?.response?.data?.message || "Failed to join event");
-  }
-};
-
+  if (loading || isLoading) return <LoadingSpinner />;
+  if (!filteredEvents) return <NoData />;
 
   return (
     <div className="max-w-7xl mx-auto p-4 my-10">

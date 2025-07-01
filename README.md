@@ -202,7 +202,7 @@ Special thanks to **open-source libraries** and tools that made this project pos
 
 ## 📧 Contact & Credits
 
-Created with ❤️ by **Rownak Abdullah Omi**
+Created with ❤️ by **Rownak Abdullah**
 
 * 📬 Email: [rownakabdullahomi@gmail.com](mailto:rownakabdullahomi@gmail.com)
 * 🌐 Portfolio: [https://rownak-abdullah.web.app](https://rownak-abdullah.web.app)

@@ -157,7 +157,7 @@ const Register = () => {
               {/* Register Button */}
               <button
                 type="submit"
-                className="btn btn-secondary btn-outline w-full md:w-fit flex-1 hover:!text-white transform hover:scale-105 transition duration-300"
+                className="btn btn-secondary btn-outline w-full flex items-center justify-center gap-2 hover:!text-white transform hover:scale-105 transition duration-300"
               >
                 <FaUserPlus size={18} /> Register
               </button>
